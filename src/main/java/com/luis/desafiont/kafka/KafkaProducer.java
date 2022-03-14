@@ -17,7 +17,7 @@ public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String message){
-        log.info("Payload enviado: {}" + message);
+        log.info("Payload enviado: {}", message);
         kafkaTemplate.send(topicName, message);
     }
 }
