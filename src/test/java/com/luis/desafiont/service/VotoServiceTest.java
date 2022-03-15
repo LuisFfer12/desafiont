@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -104,6 +105,8 @@ public class VotoServiceTest {
     @Test
     void shouldOk() {
         statusCpf.setStatus(StatusCpfAssociadoEnum.ABLE_TO_VOTE.name());
-        votoService.createVoto(votoDTO);
+        assertDoesNotThrow(() -> {
+            votoService.createVoto(votoDTO);
+        });
     }
 }
