@@ -6,10 +6,12 @@ import com.luis.desafiont.entity.Pauta;
 import com.luis.desafiont.entity.Sessao;
 import com.luis.desafiont.exception.SessaoNotFoundException;
 import com.luis.desafiont.kafka.KafkaProducer;
+import com.luis.desafiont.kafka.KafkaRunnableTask;
 import com.luis.desafiont.repository.SessaoRepository;
 import org.apache.commons.lang3.time.DateUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -27,7 +29,11 @@ public class SessaoService {
     ModelMapper mapper;
 
     @Autowired
+    TaskScheduler taskScheduler;
+
+    @Autowired
     KafkaProducer producer;
+
 
     public Sessao findById(Long sessaoId) throws SessaoNotFoundException {
         return sessaoRepository.findById(sessaoId).orElseThrow(()->
@@ -47,7 +53,11 @@ public class SessaoService {
 
         SessaoDTO sessaoResponse = mapper.map(sessaoSaved,SessaoDTO.class);
         sessaoResponse.setPautaId(sessaoSaved.getPauta().getId());
-        producer.sendMessage("Sessao Criada");
+
+        taskScheduler.schedule(
+                new KafkaRunnableTask("Sessao Finalizada",producer),
+                sessaoSaved.getDtFim()
+        );
 
         return sessaoResponse;
     }
