@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Calendar;
@@ -48,6 +49,9 @@ public class SessaoServiceTest {
 
     @Mock
     KafkaProducer producer;
+
+    @Mock
+    TaskScheduler taskScheduler;
 
     @BeforeEach
     void Setup(){
