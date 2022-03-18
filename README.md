@@ -11,7 +11,7 @@
 - Docker
 - Hibernate
 - Flyway
--Heroku
+- Heroku
 
 ## Instruções de execuçao
 #### Pre Requisitos
