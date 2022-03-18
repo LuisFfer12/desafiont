@@ -11,7 +11,7 @@
 - Docker
 - Hibernate
 - Flyway
-
+-Heroku
 
 ## Instruções de execuçao
 #### Pre Requisitos
@@ -33,3 +33,7 @@
 
 ## URL's
 `http://localhost:9000/swagger-ui/index.html#/`
+
+## API Heroku
+`https://desafiont.herokuapp.com/swagger-ui/index.html#/`
+
