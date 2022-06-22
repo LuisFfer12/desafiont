@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumer {
 
-    @Value("${topic.name.consumer")
+    @Value("${topic.name.consumer}")
     private String topicName;
 
     @KafkaListener(topics = "${topic.name.consumer}", groupId = "group_id")

@@ -41,6 +41,13 @@ public class PautaService{
         Pauta pauta = findById(pautaId);
         pautaRepository.deleteById(pautaId);
     }
+
+    public Pauta editPauta(Long pautaId, PautaDTO pautaDTO) {
+        Pauta pauta = findById(pautaId);
+        mapper.map(pautaDTO,pauta);
+        Pauta pautaSaved = pautaRepository.save(pauta);
+        return pautaSaved;
+    }
 }
 
 

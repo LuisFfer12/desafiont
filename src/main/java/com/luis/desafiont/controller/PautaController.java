@@ -49,6 +49,19 @@ public class PautaController {
     }
 
     /**
+     * Edita uma Pauta por Id
+     * @param pautaId
+     * @return PautaDTO
+     */
+    @Operation(summary = "Edita uma Pauta por Id")
+    @PutMapping("/v1.0/{pautaId}")
+    public ResponseEntity<PautaDTO> editById(@PathVariable Long pautaId,@RequestBody PautaDTO pautaDTO){
+        log.info("Editando uma Pauta por Id {}",pautaId);
+        Pauta pauta = pautaService.editPauta(pautaId,pautaDTO);
+        return ResponseEntity.ok(mapper.map(pauta,PautaDTO.class));
+    }
+
+    /**
      * Deleta uma pauta por Id
      * @param pautaId
      */
